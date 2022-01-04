@@ -1,0 +1,70 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar;
+@model List<Faturalar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<br />
+<table class="table table-bordered">
+    <tr>
+        @*<th>ID</th>*@
+        <th>Seri Sıra No</th>
+        <th>Tarih</th>
+        <th>Saat</th>
+        <th>Toplam</th>
+        <th>Güncelle</th>
+        <th>Detaylar</th>
+        <th>Yeni Kalem</th>
+
+    </tr>
+    @foreach (var u in Model)
+    {
+        <tr>
+            @*<td>@u.FaturaId</td>*@
+            <td>@u.FaturaSeriNo @u.FaturaSiraNo</td>
+            <td>@u.Tarih</td>
+            <td>@u.Saat</td>
+            <td>@u.Toplam ₺</td>
+            <td><a href="/Faturalar/FaturaGetir/@u.FaturaId" class="btn btn-success">Güncelle</a></td>
+            <td><a href="/Faturalar/FaturaDetay/@u.FaturaId" class="btn btn-default" style="background-color: darkslateblue; color:white">Detaylar</a></td>
+            <td><a href="/Faturalar/YeniKalem/@u.FaturaId" class="btn btn-default" style="background-color: darkcyan; color:white"; >Kalem</a></td>
+
+        </tr>
+
+    }
+</table>
+
+<a href="/Faturalar/FaturaEkle/" class="btn btn-dark">Yeni Fatura Girişi</a>
+<br />
+<br />
+<button type="button" class="btn btn-info" style="background-color:cadetblue" data-toggle="modal" data-target="#Modal1">Pop-up Penceresi</button>
+
+<div class="modal"id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Popup Diyalog Ekranı</h2>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Seri No</td>
+                        <td>Sıra No</td>
+                        <td>Tutar</td>
+                    </tr>
+                    @foreach (var x in Model)
+                    {
+                    <tr>
+                        <td>@x.FaturaSeriNo</td>
+                        <td>@x.FaturaSiraNo</td>
+                        <td>@x.Toplam</td>
+                    </tr>
+                    }
+
+                </table>
+                <button type="button"class="btn btn-outline-success" data-dismiss="modal">Tamam</button>
+            </div>
+        </div>
+    </div>
+</div>
